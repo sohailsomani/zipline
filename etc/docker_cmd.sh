@@ -3,6 +3,7 @@
 #
 # generate configuration, cert, and password if this is the first run
 #
+mkdir /root/.jupyter
 if [ ! -f /var/tmp/zipline_init ] ; then
     jupyter notebook --generate-config
     if [ ! -f ${SSL_CERT_PEM} ] ; then
@@ -14,6 +15,6 @@ if [ ! -f /var/tmp/zipline_init ] ; then
     touch /var/tmp/zipline_init
 fi
 
-jupyter notebook -y --no-browser --notebook-dir=${PROJECT_DIR} \
+jupyter notebook -y --allow-root --no-browser --notebook-dir=${PROJECT_DIR} \
     --certfile=${SSL_CERT_PEM} --keyfile=${SSL_CERT_KEY} --ip='*' \
     --config=${CONFIG_PATH}
